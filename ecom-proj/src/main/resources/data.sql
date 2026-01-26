@@ -2,10 +2,10 @@
 DELETE FROM product;
 
 -- Insert sample product data
--- Column order: id, available, brand, category, desc, name, price, quantity, release_date
+-- Column order: id, brand, category, desc, image_date, image_name, image_type, name, price, product_available, release_date, stock_quantity
 INSERT INTO product VALUES
-(DEFAULT, TRUE, 'Tata Motors', 'Cars', 'A compact SUV with excellent safety features and performance.', 'Tata Nexon', 700000, 10, CURRENT_DATE),
-(DEFAULT, TRUE, 'Maruti Suzuki', 'Cars', 'A popular hatchback known for its fuel efficiency and reliability.', 'Maruti Suzuki Swift', 550000, 10, CURRENT_DATE),
-(DEFAULT, TRUE, 'Hyundai', 'Cars', 'A stylish SUV with advanced features and comfortable interior.', 'Hyundai Creta', 900000, 10, CURRENT_DATE),
-(DEFAULT, TRUE, 'Mahindra', 'Cars', 'A rugged off-road SUV with a powerful engine and modern amenities.', 'Mahindra Thar', 1200000, 10, CURRENT_DATE),
-(DEFAULT, TRUE, 'Honda', 'Cars', 'A premium sedan with a sleek design and advanced safety features.', 'Honda City', 1100000, 10, CURRENT_DATE);
+(DEFAULT, 'Tata Motors', 'Cars', 'A compact SUV with excellent safety features and performance.', NULL, NULL, NULL, 'Tata Nexon', 700000, TRUE, CURRENT_DATE, 10),
+(DEFAULT, 'Maruti Suzuki', 'Cars', 'A popular hatchback known for its fuel efficiency and reliability.', NULL, NULL, NULL, 'Maruti Suzuki Swift', 550000, TRUE, CURRENT_DATE, 10),
+(DEFAULT, 'Hyundai', 'Cars', 'A stylish SUV with advanced features and comfortable interior.', NULL, NULL, NULL, 'Hyundai Creta', 900000, TRUE, CURRENT_DATE, 10),
+(DEFAULT, 'Mahindra', 'Cars', 'A rugged off-road SUV with a powerful engine and modern amenities.', NULL, NULL, NULL, 'Mahindra Thar', 1200000, TRUE, CURRENT_DATE, 10),
+(DEFAULT, 'Honda', 'Cars', 'A premium sedan with a sleek design and advanced safety features.', NULL, NULL, NULL, 'Honda City', 1100000, TRUE, CURRENT_DATE, 10);
