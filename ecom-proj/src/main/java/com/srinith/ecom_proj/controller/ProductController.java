@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -43,28 +44,10 @@ public class ProductController {
                                         @RequestPart(value = "imageFile", required = false) MultipartFile imageFile){
 
         try {
-            System.out.println("========== ADD PRODUCT REQUEST ==========");
-            System.out.println("Received product: " + product);
-            System.out.println("Product name: " + product.getName());
-            System.out.println("Product brand: " + product.getBrand());
-            System.out.println("Product price: " + product.getPrice());
-            System.out.println("Product stockQuantity: " + product.getStockQuantity());
-            System.out.println("Product available: " + product.isProductAvailable());
-            System.out.println("Product category: " + product.getCategory());
-            System.out.println("Product releaseDate: " + product.getReleaseDate());
-            System.out.println("Image file: " + (imageFile != null ? imageFile.getOriginalFilename() : "null"));
-            System.out.println("==========================================");
-            
-            Product product1 = service.addproduct(product, imageFile);
-            System.out.println("Product saved successfully with ID: " + product1.getId());
-            return new ResponseEntity<>(product1, HttpStatus.CREATED);
+            Product savedProduct = service.addproduct(product, imageFile);
+            return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
         }
         catch(Exception e){
-            System.err.println("========== ERROR IN addProduct ==========");
-            System.err.println("ERROR type: " + e.getClass().getName());
-            System.err.println("ERROR message: " + e.getMessage());
-            e.printStackTrace(); // Log the full stack trace
-            System.err.println("==========================================");
             String errorMessage = e.getMessage() != null ? e.getMessage() : "Unknown error occurred";
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -92,6 +75,44 @@ public class ProductController {
 
 
     }
+    @PutMapping("/product/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable int id, @RequestPart("product") Product product,
+                                                @RequestPart(value = "imageFile", required = false) MultipartFile imageFile){
+        Product product1 = null;
+        try {
+            Product updatedProduct = service.updateProduct(id, product, imageFile);
+            if (updatedProduct != null) {
+                return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Failed to Update", HttpStatus.BAD_REQUEST);
+            }
+        } catch (IOException e) {
+            return new ResponseEntity<>("Failed to Update: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to Update: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable int id){
+
+        Product product = service.getProductById(id);
+
+        if (product != null){
+            service.deleteProduct(id);
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+
+        }
+        else
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+
+    }
+
+
+
+
+
+
 
 
 
