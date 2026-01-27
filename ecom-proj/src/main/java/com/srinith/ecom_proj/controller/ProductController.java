@@ -78,7 +78,6 @@ public class ProductController {
     @PutMapping("/product/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable int id, @RequestPart("product") Product product,
                                                 @RequestPart(value = "imageFile", required = false) MultipartFile imageFile){
-        Product product1 = null;
         try {
             Product updatedProduct = service.updateProduct(id, product, imageFile);
             if (updatedProduct != null) {
@@ -108,6 +107,12 @@ public class ProductController {
 
     }
 
+
+    @GetMapping("/product/search")
+    public ResponseEntity<List<Product>> searchProducts(@RequestParam String keyword){
+        List<Product> products = service.searchProducts(keyword);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 
 
 

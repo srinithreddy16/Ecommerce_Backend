@@ -20,7 +20,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String desc;
+    @Column(name = "desc")
+    private String description;
     private String brand;
     private BigDecimal price;
     private String category;
