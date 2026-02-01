@@ -2,6 +2,21 @@
 
 A REST API backend for product management built with **Spring Boot**. It provides full CRUD operations for products, image upload support, and keyword search—suitable for e-commerce backends or product catalogs.
 
+### Frontend
+
+This backend is designed to work with the companion **Ecommerce Frontend** (React + Vite), which provides a responsive UI for product listing, search, cart, and checkout. Clone and run the frontend alongside this API for the full stack:
+
+**[Ecommerce Frontend →](https://github.com/srinithreddy16/Ecommerce_Frontend.git)**
+
+```bash
+git clone https://github.com/srinithreddy16/Ecommerce_Frontend.git
+cd Ecommerce_Frontend
+npm install
+npm run dev
+```
+
+Ensure this backend is running at **http://localhost:8080** so the frontend API calls work correctly.
+
 ---
 
 ## Features
